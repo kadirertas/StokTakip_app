@@ -1,0 +1,65 @@
+﻿
+@using StokTakip_Deneme_.Models.Entity
+@model List<StokTakip_Deneme_.Models.Entity.Markalar>
+
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Marka Listesi  </h2>
+
+<table class=" table table-bordered">
+
+    <thead >
+
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                KategoriID
+            </th>
+            <th>
+                Marka
+            </th>
+            <th>
+                Açıklama
+            </th>
+            <th>
+                Sil
+            </th>
+            <th>
+                Güncelle
+            </th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Kategoriler.Kategori</td>
+                <td>@item.Marka</td>
+                <td>@item.Aciklama</td>
+                <td> <a href="/Markalar/SilBilgiGetir/@item.ID" class="btn btn-danger">Sil</a></td>
+                <td> <a href="/Markalar/GuncelleBilgiGetir/@item.ID" class="btn btn-warning">Güncelle</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="width: 250px ">
+
+    <a href="/Markalar/Ekle/" class=" btn btn-success" style="margin-top:10px;">
+        Marka Ekle
+    </a>
+
+
+</div>

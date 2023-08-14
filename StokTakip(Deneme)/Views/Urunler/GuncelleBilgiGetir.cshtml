@@ -1,0 +1,113 @@
+﻿@model StokTakip_Deneme_.Models.Entity.Urunler
+@{
+    ViewBag.Title = "GuncelleBilgiGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ürün Güncelleme Sayfası </h2>
+
+<div class="container">
+    @using (Html.BeginForm("Guncelle", "Urunler", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x=>x.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.KategoriID, "Kategori")
+            @Html.DropDownListFor(x => x.KategoriID, Model.KategoriListesi, "---- Seçiniz ----", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.KategoriID, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.MarkaID, "Marka")
+            @Html.DropDownListFor(x => x.MarkaID, Model.MarkaListesi, "---- Seçiniz ----", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.MarkaID, "", new { @class = "text-danger" })
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.UrunAdi, "Ürün Adı")
+            @Html.TextBoxFor(x => x.UrunAdi, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.UrunAdi, "", new { @class = "text-danger" })
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.BarkodNo, "Barkod No")
+            @Html.TextBoxFor(x => x.BarkodNo, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.BarkodNo, "", new { @class = "text-danger" })
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.AlisFiyati, "Alış Fiyatı")
+            @Html.TextBoxFor(x => x.AlisFiyati, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.AlisFiyati, "", new { @class = "text-danger" })
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.SatisFiyati, "Satış Fiyatı ")
+            @Html.TextBoxFor(x => x.SatisFiyati, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.SatisFiyati, "", new { @class = "text-danger" })
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.Miktari, "Miktarı")
+            @Html.TextBoxFor(x => x.Miktari, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Miktari, "", new { @class = "text-danger" })
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.KDV, "KDV")
+            @Html.TextBoxFor(x => x.KDV, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.KDV, "", new { @class = "text-danger" })
+
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Birimler.Birim, "Birim")
+            @Html.DropDownListFor(x => x.BirimID, Model.BirimListesi, "---- Seçiniz ----", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.BirimID, "", new { @class = "text-danger" })
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.Tarih, "Tarih")
+            @Html.TextBoxFor(x => x.Tarih, new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(x => x.Tarih, "", new { @class = "text-danger" })
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.Aciklama, "Aciklama")
+            @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Aciklama, "", new { @class = "text-danger" })
+
+        </div>
+        <div>
+            <button class="btn btn-primary"> Ürün Güncelle </button>
+            <a href="/Urunler/Index/">Ana Sayfa </a>
+        </div>
+    }
+</div>
+
+
+@section scripts
+{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#KategoriID").change(function () {
+                var ID = $(this).val();
+                var markalist = $("#MarkaID");
+                markalist.empty();
+                $.ajax({
+                    url: '/Urunler/GetMarka/',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { 'id2': ID },
+                    success: function (data) {
+                        $.each(data, function (index, option) {
+                            markalist.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

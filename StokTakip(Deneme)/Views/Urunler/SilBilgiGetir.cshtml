@@ -1,0 +1,91 @@
+﻿
+@model StokTakip_Deneme_.Models.Entity.Urunler
+@{
+    ViewBag.Title = "Sil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ürün Silme </h2>
+
+<div class="container">
+    @using (Html.BeginForm("Sil", "Urunler", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.KategoriID, "Kategori")
+            @Html.TextBoxFor(x => x.KategoriID, Model.KategoriListesi)
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.MarkaID, "Marka")
+            @Html.TextBoxFor(x => x.MarkaID, Model.MarkaListesi)
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.UrunAdi, "Ürün Adı")
+            @Html.TextBoxFor(x => x.UrunAdi, new { @class = "form-control" })
+
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.BarkodNo, "Barkod No")
+            @Html.TextBoxFor(x => x.BarkodNo, new { @class = "form-control" })
+
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.AlisFiyati, "Alış Fiyatı")
+            @Html.TextBoxFor(x => x.AlisFiyati, new { @class = "form-control" })
+
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.SatisFiyati, "Satış Fiyatı ")
+            @Html.TextBoxFor(x => x.SatisFiyati, new { @class = "form-control" })
+
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.Miktari, "Miktarı")
+            @Html.TextBoxFor(x => x.Miktari, new { @class = "form-control" })
+
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.KDV, "KDV")
+            @Html.TextBoxFor(x => x.KDV, new { @class = "form-control" })
+
+
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Birimler.Birim, "Birim")
+            @Html.TextBoxFor(x => x.BirimID, Model.BirimListesi)
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.Tarih, "Tarih")
+            @Html.TextBoxFor(x => x.Tarih, new { type = "date" })
+
+
+        </div>
+        <div class=" form-group">
+            @Html.LabelFor(x => x.Aciklama, "Aciklama")
+            @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control" })
+
+
+        </div>
+        if (User.IsInRole("ceo") || User.IsInRole("personel"))
+        {
+             <div>
+           <button class="btn btn-primary"> Ürünü Sil </button>
+          <a href="/Urunler/Index/">Ana Sayfa </a>
+           </div> 
+        }
+    }
+    
+    }
+</div>

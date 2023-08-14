@@ -1,0 +1,58 @@
+﻿@model List<StokTakip_Deneme_.Models.Entity.Urunler>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ürün Listeleme </h2>
+
+<table class="table" id="urun">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>KategoriID</th>
+            <th>MarkaID</th>
+            <th>Ürün Adı </th>
+            <th>Barkod No </th>
+            <th>Alış Fiyatı</th>
+            <th>Satış Fiyatı </th>
+            <th>Miktari</th>
+            <th>KDV</th>
+            <th>BirimID</th>
+            <th>Tarih</th>
+            <th>Aciklama</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <th>@item.ID</th>
+                <th>@item.Kategoriler.Kategori</th>
+                <th>@item.Markalar.Marka</th>
+                <th>@item.UrunAdi</th>
+                <th>@item.BarkodNo</th>
+                <th>@item.AlisFiyati</th>
+                <th>@item.SatisFiyati</th>
+                <th>@item.Miktari</th>
+                <th>% @item.KDV</th>
+                <th>@item.Birimler.Birim</th>
+                <th>@item.Tarih</th>
+                <th>@item.Aciklama</th>
+                <th><a href="/Urunler/SilBilgiGetir/@item.ID" class="btn btn-danger">Sil</a></th>
+                @*    <td><input type="submit" name="btn" value="Sil" class=" btn btn-danger" /></td>*@
+                <th><a href="/Urunler/GuncelleBilgiGetir/@item.ID" class="btn btn-warning">Güncelle</a></th>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (User.IsInRole("ceo") || User.IsInRole("personel"))
+{
+    <div style="width: 250px ">
+        <a href="/Urunler/Ekle/" class="btn btn-success" style="margin-top:10px;">
+            Ürün Ekle
+        </a>
+    </div>
+}

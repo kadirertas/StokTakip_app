@@ -1,0 +1,35 @@
+﻿@model List<StokTakip_Deneme_.Models.Entity.Kategoriler>
+
+<h2>Kategori Ana Sayfası</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Kategori</th>
+            <th>Açıklama</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.ID</th>
+                <th>@item.Kategori</th>
+                <th>@item.Aciklama</th>
+                <th><a href="/Kategoriler/SilBilgiGetir/@item.ID" class="btn btn-danger">Sil</a></th>
+                <th><a href="/Kategoriler/GuncelleBilgiGetir/@item.ID" class="btn btn-warning">Güncelle</a></th>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (User.IsInRole("ceo") || User.IsInRole("personel"))
+{
+
+    <div style="width: 250px;">
+        <a href="/Kategoriler/Ekle" class="btn btn-success" style="margin-top: 10px;">Kategori Ekle</a>
+    </div>
+}

@@ -1,0 +1,46 @@
+﻿@model StokTakip_Deneme_.Models.Entity.Birimler
+    
+
+
+
+@{
+    ViewBag.Title = "SilBilgiGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SilBilgiGetir</h2>
+
+<div class=" container">
+
+
+
+
+    @using (Html.BeginForm("Sil", "Birimler"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.ID)
+        <div class=" form-group">
+
+
+            @Html.LabelFor(x => x.Birim)
+            @Html.DisplayFor(x => x.Birim, new { @class = "form control" })
+        </div>
+        <div>
+            @Html.LabelFor(x => x.Aciklama)
+            @Html.DisplayFor(x => x.Aciklama, new { @class = "form control" })
+        </div>
+        <div>
+
+            <button class=" btn btn-danger">Birim Sil </button>
+            <a href="/Birimler/Index">Ana Sayfa</a>
+        </div>
+
+    }
+
+
+
+
+
+
+
+</div>
